@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import * as Styled from './Header.style';
 import cart from '../../assets/Vector.svg';
 
-const FETCH_DATA = gql`
+const FETCH_CURRENCY = gql`
     query {
         currencies {
             symbol
@@ -13,16 +13,16 @@ const FETCH_DATA = gql`
 `;
 
 const Header = () => {
-    const {data, loading} = useQuery(FETCH_DATA);
+    const {data, loading} = useQuery(FETCH_CURRENCY);
     const [currency, setCurrency] = useState([]);
     useEffect(() => {
         if(!loading) {
             setCurrency(data.currencies)
         }
-    }, [data, loading])
+    }, [data, loading]);
 
     if (loading) {
-        return <h1>Loading...</h1>
+        return <h2>Loading...</h2>
     }
 
     return(
