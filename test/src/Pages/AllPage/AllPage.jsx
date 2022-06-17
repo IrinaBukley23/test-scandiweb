@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import * as Styled from './AllPage.style';
+import Card from '../../components/Card/Card';
 import { gql, useQuery } from "@apollo/client";
 
 const FETCH_ALL = gql`
@@ -8,6 +9,7 @@ const FETCH_ALL = gql`
             name,
             products {
               name,
+              gallery,
               prices {
                 amount,
                 currency {
@@ -29,23 +31,29 @@ const AllPage = () => {
        }
     }, [data, loading]);
 
-    console.log(allList);
-
     if (loading) {
         return <h2>Loading...</h2>
     }
 
     return(
         <>
-        <h2>All</h2>
         <Styled.Wrapper>
-            <ul>
-           {allList.map(item => {
+           {allList.map( item => {
+            const allProd = item.products;
             if(item.name === 'all') {
-                return <li>{item.name}</li>
+                return (
+                    <>
+                    {allProd?.map( (elem) => {
+                        return <Card 
+                        galery={elem.gallery[0]} 
+                        name={elem.name}
+                        price={elem.prices[0].amount}
+                        currency={elem.prices[0].currency.symbol}
+                        />
+                    } )}
+                    </>)
             }
-           })}
-           </ul>
+           } )}
         </Styled.Wrapper>
         </>
     )
