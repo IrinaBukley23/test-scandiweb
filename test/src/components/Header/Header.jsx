@@ -8,7 +8,7 @@ import bag from '../../assets/bag.svg';
 const FETCH_CURRENCY = gql`
     query {
         currencies {
-            symbol
+            symbol, label
         }
     }
 `;
@@ -16,6 +16,7 @@ const FETCH_CURRENCY = gql`
 const Header = () => {
     const {data, loading} = useQuery(FETCH_CURRENCY);
     const [currency, setCurrency] = useState([]);
+    const [selected, setSelected] = useState('');
     useEffect(() => {
         if(!loading) {
             setCurrency(data.currencies)
@@ -24,6 +25,11 @@ const Header = () => {
 
     if (loading) {
         return <h2>Loading...</h2>
+    }
+
+    const handleSelect = (e) => {
+        setSelected(e.target.value);
+        console.log(e.target);
     }
 
     return(
@@ -44,9 +50,13 @@ const Header = () => {
                 <img src={bag} alt='bag'/>
             </Styled.Bag>
             <Styled.Currency>
-                <select>
-                {currency.map(item => <option key={item.symbol}>{item.symbol}</option>)}
+                <select value={selected} onChange={handleSelect}>
+                    {currency.map(item => <option value={item.label} key={item.symbol}>{item.symbol}</option>)}
                 </select>
+                {/* <input type="text" list="country-value" />
+                <datalist id="country-value">
+                    {currency.map(item => <option value={item.symbol} key={item.symbol}>{item.label}</option>)}
+                </datalist> */}
                 <img src={cart} alt="cart" />
             </Styled.Currency>
         </Styled.Wrapper>

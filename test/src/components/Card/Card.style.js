@@ -23,7 +23,6 @@ export const Image = styled.div`
 `;
 
 export const Name = styled.h3`
-    font-family: 'Raleway';
     font-weight: 300;
     font-size: 18px;
     line-height: 160%;
@@ -32,4 +31,9 @@ export const Name = styled.h3`
 
 export const Price = styled.div`
     display: flex;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 160%;
+    text-align: right;
+    color: #1D1F22;
 `;

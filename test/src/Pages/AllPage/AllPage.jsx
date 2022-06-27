@@ -1,36 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import * as Styled from './AllPage.style';
 import Card from '../../components/Card/Card';
-import { gql, useQuery } from "@apollo/client";
-
-const FETCH_ALL = gql`
-    query {
-        categories {
-            name,
-            products {
-              name,
-              gallery,
-              prices {
-                amount,
-                currency {
-                  symbol
-                }
-              }
-            }
-          }
-    }
-`;
+import { useQuery } from "@apollo/client";
+import {FETCH_ALL} from '../../queries/queries';
 
 const AllPage = () => {
     const {data, loading} = useQuery(FETCH_ALL);
     const [allList, setAllList] = useState([]);
-
     useEffect(() => {
        if(!loading) {
         setAllList(data.categories);
        }
     }, [data, loading]);
-
+    
     if (loading) {
         return <h2>Loading...</h2>
     }
@@ -43,8 +25,11 @@ const AllPage = () => {
             if(item.name === 'all') {
                 return (
                     <>
+                    <Styled.Title>{item.name}</Styled.Title>
                     {allProd?.map( (elem) => {
                         return <Card 
+                        key={elem.id}
+                        id={elem.id}
                         galery={elem.gallery[0]} 
                         name={elem.name}
                         price={elem.prices[0].amount}

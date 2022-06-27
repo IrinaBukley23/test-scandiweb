@@ -21,6 +21,7 @@ export const Bag = styled.div`
 
 export const Currency = styled.div`
   select {
+    width: 70px;
     border: none;
     margin-right: 38px;
     font-family: 'Raleway';
@@ -40,9 +41,9 @@ export const Ul = styled.ul`
     text-transform: uppercase;
     color: #1D1F22;
     padding-bottom: 30px;
-    &.active-link {
-      color: #5ECE7B;
-      border-bottom: 2px solid #5ECE7B;
-    }
+  }
+  active-link {
+    color: #5ECE7B;
+    border-bottom: 2px solid #5ECE7B;
   }
 `;

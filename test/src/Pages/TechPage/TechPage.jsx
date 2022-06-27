@@ -1,25 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import * as Styled from './TechPage.style';
 import Card from '../../components/Card/Card';
-import { gql, useQuery } from "@apollo/client";
-
-const FETCH_ALL = gql`
-    query {
-        categories {
-            name,
-            products {
-              name,
-              gallery,
-              prices {
-                amount,
-                currency {
-                  symbol
-                }
-              }
-            }
-          }
-    }
-`;
+import { useQuery } from "@apollo/client";
+import {FETCH_ALL} from '../../queries/queries';
 
 const TechPage = () => {
 
@@ -44,8 +27,10 @@ const TechPage = () => {
             if(item.name === 'tech') {
                 return (
                     <>
+                    <Styled.Title key={item.id}>{item.name}</Styled.Title>
                     {techProd?.map( (elem) => {
                         return <Card 
+                        key={elem.id}
                         galery={elem.gallery[0]} 
                         name={elem.name}
                         price={elem.prices[0].amount}

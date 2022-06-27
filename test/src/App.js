@@ -4,6 +4,7 @@ import ErrorPage from './Pages/ErrorPage/ErrorPage';
 import TechPage from './Pages/TechPage/TechPage';
 import ClothesPage from './Pages/ClothesPage/ClothesPage';
 import AllPage from './Pages/AllPage/AllPage';
+import SinglePage from './Pages/SinglePage/SinglePage';
 import Layout from './components/Layout/Layout';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
 import './App.css';
@@ -24,6 +25,7 @@ class App extends React.Component {
             <Route index element={<AllPage />} />
             <Route path="tech" element={<TechPage />} />
             <Route path="clothes" element={<ClothesPage />} />
+            <Route path="/:id" element={<SinglePage />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
