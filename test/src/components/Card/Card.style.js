@@ -15,10 +15,10 @@ export const Wrapper = styled.div`
 export const Image = styled.div`
     margin-bottom: 35px;
     height: 356px;
+    overflow: hidden;
+    object-fit: cover;
     img {
         width: 100%;
-        height: 100%;
-        overflow: hidden;
     }
 `;
 
